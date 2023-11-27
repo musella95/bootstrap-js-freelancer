@@ -1,3 +1,7 @@
+
+let validDiscountCode = ["YHDNU32","JANJC63","PWKCN25","SJDPO96","POCIE24"];
+
+
 function serviceBook(event){
     event.preventDefault();
     let typeOfWork = document.getElementById("type-of-work").value;
@@ -5,26 +9,34 @@ function serviceBook(event){
     let hours = document.getElementById("hours").value;
     hours = parseInt(hours);
 
-    let discount =["YHDNU32","JANJC63","PWKCN25","SJDPO96","POCIE24",]
-    let price;
+    let discountCode = document.getElementById("discount-code").value;
+
     
+    let discount = 0.75;
+    let finalPrice;
     
     switch(typeOfWork){
         case "backEnd":
-            price = hours * 20.50;
+            finalPrice = hours * 20.50;
             break;
         case "frontEnd":
-            price = hours * 15,30;
+            finalPrice = hours * 15.30;
             break;
         case "projectAnalysis":
-            price = hours * 33,60;
+            finalPrice = hours * 33.60;
             break;
             default:
-                price = alert("CAMPO NON COMPILATO");
-
-
-
+                alert("CAMPO NON COMPILATO");
     }
-    let totalCost = price;
+
+    if (validDiscountCode.includes(discountCode)) {
+        finalPrice = finalPrice * discount;
+    }
+      
+    finalPrice = finalPrice.toFixed(2);
+
+    console.log(finalPrice);
     
+    // Inserisci il prezzo scontato nell'HTML
+        document.getElementById("prezzo-finale-utente").innerHTML=finalPrice;
 }
